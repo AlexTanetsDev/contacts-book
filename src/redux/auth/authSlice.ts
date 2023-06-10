@@ -1,13 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { logIn, logOut, refreshUser, register } from "./operators";
 
-interface User {
+export interface IUser {
   name: string | null;
   email: string | null;
 }
 
 export interface AuthState {
-  user: User;
+  user: IUser;
   token: string | null;
   isLoggedIn: boolean;
   isRefreshing: boolean;
@@ -28,7 +28,7 @@ const authSlice = createSlice({
     builder
       .addCase(
         register.fulfilled,
-        (state, action: PayloadAction<{ user: User; token: string }>) => {
+        (state, action: PayloadAction<{ user: IUser; token: string }>) => {
           state.user = action.payload.user;
           state.token = action.payload.token;
           state.isLoggedIn = true;
@@ -36,7 +36,7 @@ const authSlice = createSlice({
       )
       .addCase(
         logIn.fulfilled,
-        (state, action: PayloadAction<{ user: User; token: string }>) => {
+        (state, action: PayloadAction<{ user: IUser; token: string }>) => {
           state.user = action.payload.user;
           state.token = action.payload.token;
           state.isLoggedIn = true;
@@ -50,7 +50,7 @@ const authSlice = createSlice({
       .addCase(refreshUser.pending, (state) => {
         state.isRefreshing = true;
       })
-      .addCase(refreshUser.fulfilled, (state, action: PayloadAction<User>) => {
+      .addCase(refreshUser.fulfilled, (state, action: PayloadAction<IUser>) => {
         state.user = action.payload;
         state.isLoggedIn = true;
         state.isRefreshing = false;

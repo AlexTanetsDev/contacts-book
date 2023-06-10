@@ -11,15 +11,21 @@
     "@types/node": "^16.18.34",
     "@types/react": "^18.2.9",
     "@types/react-dom": "^18.2.4",
-    "@types/react-redux": "^7.1.25",
     "axios": "^1.4.0",
+    "formik": "^2.4.1",
+    "modern-normalize": "^2.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-icons": "^4.9.0",
     "react-redux": "^8.0.7",
+    "react-router-dom": "^6.12.1",
     "react-scripts": "5.0.1",
     "redux-persist": "^6.0.0",
+    "styled-components": "^5.3.11",
+    "styled-system": "^5.1.5",
     "typescript": "^4.9.5",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "yup": "^1.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -44,5 +50,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/styled-components": "^5.1.26"
   }
 }

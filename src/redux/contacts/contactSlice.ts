@@ -2,10 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 import { fetchContacts, addContact, deleteContact } from "./operations";
 
 export interface IContact {
-  id: number;
+  id?: number;
   name: string;
-  email: string;
-  phone: string;
+  number: string;
 }
 
 export interface IContactsState {

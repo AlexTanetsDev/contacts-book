@@ -1,5 +1,5 @@
-import { IContact, IContactsState } from "./contactSlice";
+import type { RootState } from "../store";
 
-export const selectContacts = ({ state }) => state.contacts.items;
-export const selectIsloading = (state) => state.contacts.isLoading;
-export const selectError = (state) => state.contacts.error;
+export const selectContacts = (state: RootState) => state.contacts.items;
+export const selectIsloading = (state: RootState) => state.contacts.isLoading;
+export const selectError = (state: RootState) => state.contacts.error;
