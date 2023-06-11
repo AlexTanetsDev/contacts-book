@@ -1,36 +1,63 @@
-import { FormLabel, SubmitButton } from "../contactForm/ContactForm.styled";
-import { StyledInput } from "../filter/filter.styled";
+import * as yup from "yup";
+import { useForm, SubmitHandler } from "react-hook-form";
+import {
+  FormLabel,
+  SubmitButton,
+  StyledField,
+} from "../contactForm/ContactForm.styled";
 import { useAppDispatch } from "../../hooks";
 import { logIn } from "../../redux/auth/operators";
 import { StyledLoginForm } from "./LoginFormStyled";
 
+const schema = yup.object().shape({
+  email: yup.string().required(),
+  password: yup.string().required(),
+});
+
+type Inputs = {
+  email: string;
+  password: string;
+};
+
 export const LoginForm = () => {
   const dispatch = useAppDispatch();
 
-  const handleSubmit = (e: {
-    preventDefault: () => void;
-    currentTarget: any;
-  }) => {
-    e.preventDefault();
-    const form = e.currentTarget;
-    dispatch(
-      logIn({
-        email: form.elements.email.value,
-        password: form.elements.password.value,
-      })
-    );
-    form.reset();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<Inputs>();
+
+  const handleFormSubmit: SubmitHandler<Inputs> = (data) => {
+    dispatch(logIn(data));
   };
 
   return (
-    <StyledLoginForm onSubmit={handleSubmit} autoComplete="off">
-      <FormLabel>
+    <StyledLoginForm
+      autoComplete="off"
+      onSubmit={handleSubmit(handleFormSubmit)}
+    >
+      <FormLabel htmlFor="email">
         Email
-        <StyledInput type="email" name="email" placeholder="example@mail.com" />
+        <StyledField
+          type="email"
+          placeholder="example@mail.com"
+          defaultValue=""
+          {...register("email")}
+        />
+        {errors.email && <span>This field is required</span>}
       </FormLabel>
-      <FormLabel>
+
+      <FormLabel htmlFor="password">
         Password
-        <StyledInput type="password" name="password" placeholder="example123" />
+        <StyledField
+          type="password"
+          placeholder="example123"
+          defaultValue=""
+          {...register("password")}
+        />
+        {errors.password && <span>This field is required</span>}
       </FormLabel>
       <SubmitButton type="submit">Log In</SubmitButton>
     </StyledLoginForm>

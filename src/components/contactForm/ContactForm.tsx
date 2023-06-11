@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Formik, ErrorMessage } from "formik";
+import { useForm, SubmitHandler } from "react-hook-form";
 import {
   ContactsForm,
   FormLabel,
@@ -20,39 +20,44 @@ const schema = yup.object().shape({
   number: yup.number().required().positive().integer(),
 });
 
-const initialValues: IContact = {
-  name: "",
-  number: "",
-};
-
 export const ContactForm: FC<IContactFormProps> = ({ modalClose }) => {
   const dispatch = useAppDispatch();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<IContact>();
 
-  const hendleSubmit = (values: IContact, { resetForm }: any) => {
-    dispatch(addContact(values));
-    resetForm();
-    modalClose();
+  const handleFormSubmit: SubmitHandler<IContact> = (data) => {
+    console.log(data);
+    // dispatch(addContact(data));
+    // modalClose();
   };
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={schema}
-      onSubmit={hendleSubmit}
-    >
-      <ContactsForm autoComplete="off">
-        <FormLabel htmlFor="name">
-          Name
-          <StyledField type="text" name="name" placeholder="Contact Name" />
-          <ErrorMessage name="name" component="div" />
-        </FormLabel>
+    <ContactsForm autoComplete="off" onSubmit={handleSubmit(handleFormSubmit)}>
+      <FormLabel htmlFor="name">
+        Name
+        <StyledField
+          type="text"
+          placeholder="Contact Name"
+          defaultValue=""
+          {...register("name")}
+        />
+        {errors.name && <span>This field is required</span>}
+      </FormLabel>
 
-        <FormLabel htmlFor="number">
-          Number
-          <StyledField type="tel" name="number" placeholder="011 22 33 44" />
-          <ErrorMessage name="number" component="div" />
-        </FormLabel>
-        <SubmitButton type="submit">Add contact</SubmitButton>
-      </ContactsForm>
-    </Formik>
+      <FormLabel htmlFor="number">
+        Number
+        <StyledField
+          type="tel"
+          placeholder="011 22 33 44"
+          defaultValue=""
+          {...register("number")}
+        />
+        {errors.number && <span>This field is required</span>}
+      </FormLabel>
+      <SubmitButton type="submit">Add contact</SubmitButton>
+    </ContactsForm>
   );
 };

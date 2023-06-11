@@ -35,7 +35,7 @@ export default function Contacts() {
         Add contact
       </AddContactBtn>
       {isModalOpen && <Modal modalClose={toggleModal} />}
-      <h2>
+      <h2 style={{ textAlign: "center" }}>
         {contacts.length === 0
           ? "Here will be your contacts. Add contacts"
           : "Contacts"}
