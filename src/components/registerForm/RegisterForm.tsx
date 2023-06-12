@@ -1,5 +1,5 @@
 import * as yup from "yup";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 import {
   FormLabel,
@@ -9,29 +9,27 @@ import {
 import { StyledLoginForm } from "../logitForm/LoginFormStyled";
 import { useAppDispatch } from "../../hooks";
 import { userRegister } from "../../redux/auth/operators";
+import { yupResolver } from "@hookform/resolvers/yup";
 
-type Inputs = {
-  name: string;
-  email: string;
-  password: string;
-};
-
+const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const schema = yup.object().shape({
   name: yup.string().required(),
   email: yup.string().required(),
   password: yup.string().required(),
 });
 
+type FormData = yup.InferType<typeof schema>;
 export const RegisterForm = () => {
   const dispatch = useAppDispatch();
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm<FormData>({
+    resolver: yupResolver(schema),
+  });
 
-  const handleFormSubmit: SubmitHandler<Inputs> = async (data) => {
+  const handleFormSubmit = (data: FormData) => {
     dispatch(userRegister(data));
   };
 

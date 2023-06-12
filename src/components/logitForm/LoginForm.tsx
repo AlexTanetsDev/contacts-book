@@ -1,5 +1,5 @@
 import * as yup from "yup";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import {
   FormLabel,
   SubmitButton,
@@ -8,29 +8,47 @@ import {
 import { useAppDispatch } from "../../hooks";
 import { logIn } from "../../redux/auth/operators";
 import { StyledLoginForm } from "./LoginFormStyled";
+import { useState } from "react";
+import { yupResolver } from "@hookform/resolvers/yup";
 
+const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const schema = yup.object().shape({
-  email: yup.string().required(),
-  password: yup.string().required(),
+  email: yup.string().required().matches(emailRegex),
+  password: yup.string().required().min(6, "email must be more than 6 symbols"),
 });
-
-type Inputs = {
-  email: string;
-  password: string;
-};
+type FormData = yup.InferType<typeof schema>;
 
 export const LoginForm = () => {
   const dispatch = useAppDispatch();
+  const [isValidEmail, setIsValidEmail] = useState(true);
+  const [isValidPass, setIsValidPass] = useState(true);
 
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm<FormData>({
+    resolver: yupResolver(schema),
+  });
 
-  const handleFormSubmit: SubmitHandler<Inputs> = (data) => {
+  const handleFormSubmit = (data: FormData) => {
     dispatch(logIn(data));
+  };
+
+  const handleEmailChange = (value: string) => {
+    if (!emailRegex.test(value)) {
+      setIsValidEmail(false);
+      return;
+    }
+    setIsValidEmail(true);
+  };
+
+  const handlePassChange = (value: string) => {
+    if (value.length < 6) {
+      setIsValidPass(false);
+      return;
+    }
+    setIsValidPass(true);
   };
 
   return (
@@ -44,7 +62,9 @@ export const LoginForm = () => {
           type="email"
           placeholder="example@mail.com"
           defaultValue=""
-          {...register("email")}
+          {...register("email", {
+            onChange: (e) => handleEmailChange(e.target.value),
+          })}
         />
         {errors.email && <span>This field is required</span>}
       </FormLabel>
@@ -55,7 +75,9 @@ export const LoginForm = () => {
           type="password"
           placeholder="example123"
           defaultValue=""
-          {...register("password")}
+          {...register("password", {
+            onChange: (e) => handlePassChange(e.target.value),
+          })}
         />
         {errors.password && <span>This field is required</span>}
       </FormLabel>
