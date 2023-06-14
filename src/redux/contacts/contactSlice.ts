@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchContacts, addContact, deleteContact } from "./operations";
+import { toast } from "react-hot-toast";
 
 export interface IContact {
   id?: number;
@@ -36,7 +37,10 @@ const contactsSlice = createSlice({
       .addCase(fetchContacts.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload as string;
-      })
+        toast.error("OOps something went wrong, please try again");
+      });
+
+    builder
       .addCase(addContact.pending, (state) => {
         state.isLoading = true;
       })
@@ -48,7 +52,10 @@ const contactsSlice = createSlice({
       .addCase(addContact.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload as string;
-      })
+        toast.error("OOps something went wrong, please try again");
+      });
+
+    builder
       .addCase(deleteContact.pending, (state) => {
         state.isLoading = true;
       })
@@ -62,6 +69,7 @@ const contactsSlice = createSlice({
       .addCase(deleteContact.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload as string;
+        toast.error("OOps something went wrong, please try again");
       });
   },
 });

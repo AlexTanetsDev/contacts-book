@@ -13,6 +13,7 @@ export const ContactsForm = styled.form`
 `;
 
 export const FormLabel = styled.label`
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -24,7 +25,7 @@ export const FormLabel = styled.label`
 export const StyledField = styled.input`
   border-radius: 15px;
   outline: none;
-  padding: 2px 10px;
+  padding: 2px 40px 2px 15px;
   border: none;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   background-color: #e0e0e0;

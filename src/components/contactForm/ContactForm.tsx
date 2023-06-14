@@ -74,6 +74,9 @@ export const ContactForm: FC<IContactFormProps> = ({ modalClose }) => {
       <FormLabel htmlFor="name">
         Name
         <StyledField
+          style={{
+            outline: isValidName ? "" : "1px solid red",
+          }}
           type="text"
           placeholder="Contact Name"
           defaultValue=""
@@ -87,6 +90,9 @@ export const ContactForm: FC<IContactFormProps> = ({ modalClose }) => {
       <FormLabel htmlFor="number">
         Number
         <StyledField
+          style={{
+            outline: isValidTel ? "" : "1px solid red",
+          }}
           type="tel"
           placeholder="011 22 33 44"
           defaultValue=""

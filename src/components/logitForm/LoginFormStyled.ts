@@ -11,3 +11,9 @@ export const StyledLoginForm = styled.form`
   border-radius: 15px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 `;
+
+export const EyeIconWrapper = styled.span`
+  position: absolute;
+  top: 37px;
+  right: 10px;
+`;
