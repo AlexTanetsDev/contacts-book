@@ -6,7 +6,7 @@ export const LoginLogoutBtn = styled(NavLink)`
   text-align: center;
   color: #ffffff;
   font-weight: 700;
-  font-size: 24px;
+  font-size: 18px;
   background-color: #60b8ff;
   padding: 5px;
   width: 150px;
@@ -14,6 +14,7 @@ export const LoginLogoutBtn = styled(NavLink)`
   border: none;
   outline: none;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  margin-top: 15px;
 
   :hover,
   :focus {

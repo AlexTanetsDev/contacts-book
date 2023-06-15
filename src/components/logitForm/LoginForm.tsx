@@ -14,10 +14,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const schema = yup.object().shape({
-  email: yup.string().required().matches(emailRegex),
+  email: yup
+    .string()
+    .required("Email is required")
+    .matches(emailRegex, "Invalid email"),
   password: yup
     .string()
-    .required()
+    .required("Password is required")
     .min(6, "Password can't be less than 6 letters"),
 });
 type FormData = yup.InferType<typeof schema>;
@@ -74,7 +77,7 @@ export const LoginForm = () => {
             onChange: (e) => handleEmailChange(e.target.value),
           })}
         />
-        {errors.email && <span>This field is required</span>}
+        {errors?.email && <p>{errors.email.message}</p>}
       </FormLabel>
 
       <FormLabel htmlFor="password">
@@ -93,7 +96,7 @@ export const LoginForm = () => {
         <EyeIconWrapper onClick={() => setIsSecure(!isSecure)}>
           {isSecure ? <BsEyeSlash /> : <BsEye />}
         </EyeIconWrapper>
-        {errors.password && <span>This field is required</span>}
+        {errors?.password && <p>{errors.password.message}</p>}
       </FormLabel>
       <SubmitButton type="submit">Log In</SubmitButton>
     </StyledLoginForm>

@@ -20,7 +20,7 @@ const schema = yup.object().shape({
     .string()
     .required()
     .min(1, "Name can't be empty")
-    .matches(/^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/, {
+    .matches(/^[A-Za-zА-Яа-яІіЇїЄєҐґ0-9\s'-]+$/, {
       message: "Name can include only letterrs, numbers, '-'",
     }),
   number: yup
@@ -28,7 +28,7 @@ const schema = yup.object().shape({
     .required()
     .matches(
       /^[(]{0,1}[0-9]{3}[)]{0,1}[-\s.]{0,1}[0-9]{3}[-\s.]{0,1}[0-9]{2,4}[-\s.]{0,1}[0-9]{2,4}$/,
-      { message: "This is not valid tel. Phone number must be 10 integer " }
+      { message: "Invalid number. Phone number must be 10 integer " }
     ),
 });
 type FormData = yup.InferType<typeof schema>;
@@ -39,7 +39,7 @@ export const ContactForm: FC<IContactFormProps> = ({ modalClose }) => {
   const dispatch = useAppDispatch();
   const telRegEx =
     /^[(]{0,1}[0-9]{3}[)]{0,1}[-\s.]{0,1}[0-9]{3}[-\s.]{0,1}[0-9]{2,4}[-\s.]{0,1}[0-9]{2,4}$/;
-  const nameRegEx = /^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/;
+  const nameRegEx = /^[A-Za-zА-Яа-яІіЇїЄєҐґ0-9\s'-]+$/;
 
   const {
     register,
@@ -84,7 +84,7 @@ export const ContactForm: FC<IContactFormProps> = ({ modalClose }) => {
             onChange: (e) => handleChange(e.target.value),
           })}
         />
-        {errors.name && <span>This field is required</span>}
+        {errors?.name && <p>{errors.name.message}</p>}
       </FormLabel>
 
       <FormLabel htmlFor="number">
@@ -100,7 +100,7 @@ export const ContactForm: FC<IContactFormProps> = ({ modalClose }) => {
             onChange: (e) => handleTelChange(e.target.value),
           })}
         />
-        {errors.number && <span>This field is required</span>}
+        {errors?.number && <p>{errors.number.message}</p>}
       </FormLabel>
       <SubmitButton type="submit">Add contact</SubmitButton>
     </ContactsForm>

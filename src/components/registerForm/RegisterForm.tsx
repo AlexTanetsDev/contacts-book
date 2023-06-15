@@ -18,7 +18,7 @@ const schema = yup.object().shape({
   email: yup
     .string()
     .required("Email is required")
-    .matches(emailRegex, "This isn't a valid email"),
+    .matches(emailRegex, "Invalid email"),
   password: yup
     .string()
     .required("Password is required")
@@ -86,7 +86,7 @@ export const RegisterForm = () => {
             onChange: (e) => handleNameChange(e.target.value),
           })}
         />
-        {errors.name && <span>This field is required</span>}
+        {errors?.name && <p>{errors.name.message}</p>}
       </FormLabel>
       <FormLabel htmlFor="email">
         Email
@@ -102,7 +102,7 @@ export const RegisterForm = () => {
             onChange: (e) => handleEmailChange(e.target.value),
           })}
         />
-        {errors.email && <span>This field is required</span>}
+        {errors?.email && <p>{errors.email.message}</p>}
       </FormLabel>
       <FormLabel htmlFor="password">
         Password
