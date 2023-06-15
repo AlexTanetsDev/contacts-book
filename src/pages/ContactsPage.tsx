@@ -11,6 +11,8 @@ import { GreetingWraper } from "../components/greetingBox/GreetingBox.styled";
 import { AddContactBtn } from "../components/homeView/HomeView.styled";
 import { Modal } from "../components/modal/Modal";
 import { useAppDispatch, useAppSelector } from "../hooks";
+import { ThreeDots } from "react-loader-spinner";
+import styled from "styled-components";
 
 export default function Contacts() {
   const contacts = useAppSelector(selectContacts);
@@ -31,9 +33,24 @@ export default function Contacts() {
   return (
     <GreetingWraper>
       <h1>Phonebook</h1>
-      <AddContactBtn type="button" onClick={toggleModal}>
-        Add contact
-      </AddContactBtn>
+      {isLoading && !error ? (
+        <Loader>
+          <ThreeDots
+            height="38"
+            width="80"
+            radius="9"
+            color="#60b8ff"
+            ariaLabel="three-dots-loading"
+            wrapperStyle={{}}
+            visible={true}
+          />
+        </Loader>
+      ) : (
+        <AddContactBtn type="button" onClick={toggleModal}>
+          Add contact
+        </AddContactBtn>
+      )}
+
       {isModalOpen && <Modal modalClose={toggleModal} />}
       <h2 style={{ textAlign: "center" }}>
         {contacts.length === 0
@@ -41,8 +58,14 @@ export default function Contacts() {
           : "Contacts"}
       </h2>
       {contacts.length > 1 && <Filter />}
-      {isLoading && !error && <b>Request in progress...</b>}
+
       {contacts.length !== 0 && <ContactList />}
     </GreetingWraper>
   );
 }
+
+const Loader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;

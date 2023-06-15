@@ -5,7 +5,7 @@ import { Layout } from "./components/Loyaut";
 import { PrivateRoute } from "./utils/PrivateRoute";
 import { RestrictedRoute } from "./utils/RestrictedRoute";
 import { refreshUser } from "./redux/auth/operators";
-import { useAppDispatch, useAuth } from "./hooks";
+import { useAppDispatch } from "./hooks";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 const RegisterPage = lazy(() => import("./pages/RegisterPage"));
@@ -14,15 +14,12 @@ const ContactsPage = lazy(() => import("./pages/ContactsPage"));
 
 export const App = () => {
   const dispatch = useAppDispatch();
-  const { isRefreshing } = useAuth();
 
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
 
-  return isRefreshing ? (
-    <b>Refreshing user...</b>
-  ) : (
+  return (
     <>
       <GlobalStyles />
 

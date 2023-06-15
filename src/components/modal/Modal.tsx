@@ -33,13 +33,15 @@ export const Modal: FC<ImodalProps> = ({ modalClose }) => {
     };
   }, [modalClose]);
 
-  const handleClick = (e: { target: { id: string } }) => {
-    if (e.target.id !== "overlay") return;
+  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    const target = event.target as HTMLDivElement;
+
+    if (target.id !== "overlay") return;
     modalClose();
   };
 
   return createPortal(
-    <Overlay onClick={() => handleClick} id="overlay">
+    <Overlay onClick={(event) => handleClick(event)} id="overlay">
       <GreetingWraper>
         <ModalCloseBtn type="button" onClick={modalClose}>
           <BsXLg size={30} />
