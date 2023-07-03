@@ -12,6 +12,7 @@ export interface AuthState {
   token: string | null;
   isLoggedIn: boolean;
   isRefreshing: boolean;
+  message: null | string;
 }
 
 const initialState: AuthState = {
@@ -19,6 +20,7 @@ const initialState: AuthState = {
   token: null,
   isLoggedIn: false,
   isRefreshing: false,
+  message: null,
 };
 
 const authSlice = createSlice({
@@ -31,9 +33,10 @@ const authSlice = createSlice({
         state.isRefreshing = true;
       })
       .addCase(userRegister.fulfilled, (state, action) => {
-        state.user = action.payload.user;
-        state.token = action.payload.token;
-        state.isLoggedIn = true;
+        // state.user = action.payload.user;
+        // state.token = action.payload.token;
+        // state.isLoggedIn = true;
+        state.message = action.payload.message;
         state.isRefreshing = false;
       })
       .addCase(userRegister.rejected, (state) => {

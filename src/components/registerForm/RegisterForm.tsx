@@ -73,16 +73,15 @@ export const RegisterForm = () => {
       onSubmit={handleSubmit(handleFormSubmit)}
     >
       <FormLabel htmlFor="name">
-        Username
+        User Name
         <StyledField
           style={{
             outline: isValidName ? "" : "1px solid red",
           }}
           type="text"
-          placeholder="userName"
+          placeholder="User Name"
           defaultValue=""
-          {...(register("name"),
-          {
+          {...register("name", {
             onChange: (e) => handleNameChange(e.target.value),
           })}
         />
@@ -97,13 +96,13 @@ export const RegisterForm = () => {
           type="email"
           placeholder="example@mail.com"
           defaultValue=""
-          {...(register("email"),
-          {
+          {...register("email", {
             onChange: (e) => handleEmailChange(e.target.value),
           })}
         />
         {errors?.email && <p>{errors.email.message}</p>}
       </FormLabel>
+
       <FormLabel htmlFor="password">
         Password
         <StyledField
@@ -113,15 +112,14 @@ export const RegisterForm = () => {
           type={isSecure ? "password" : "text"}
           placeholder="example123"
           defaultValue=""
-          {...(register("password"),
-          {
+          {...register("password", {
             onChange: (e) => handlePassChange(e.target.value),
           })}
         />
         <EyeIconWrapper onClick={() => setIsSecure(!isSecure)}>
           {isSecure ? <BsEyeSlash /> : <BsEye />}
         </EyeIconWrapper>
-        {errors.password && <span>This field is required</span>}
+        {errors?.password && <p>{errors.password.message}</p>}
       </FormLabel>
       <SubmitButton type="submit">Register</SubmitButton>
     </StyledLoginForm>

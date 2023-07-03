@@ -1,12 +1,23 @@
+import { useState } from "react";
 import { GreetingWraper } from "../components/greetingBox/GreetingBox.styled";
 import { LoginLinkBtn } from "../components/loginLinkBtn/LoginLinkBtn";
 import { RegisterForm } from "../components/registerForm/RegisterForm";
+import { useAppSelector } from "../hooks";
+import { selectMessage } from "../redux/auth/selectors";
 
 export default function Register() {
+  const [message] = useState(useAppSelector(selectMessage));
+
   return (
     <GreetingWraper>
-      <RegisterForm />
-      <LoginLinkBtn title={"Sing in"} to={"/login"} />
+      {message ? (
+        <p>{message}</p>
+      ) : (
+        <>
+          <RegisterForm />
+          <LoginLinkBtn title={"Sing in"} to={"/login"} />
+        </>
+      )}
     </GreetingWraper>
   );
 }
