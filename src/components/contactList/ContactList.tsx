@@ -28,13 +28,13 @@ export const ContactList = () => {
   return (
     <List>
       {getVisibleContacts().map((visibleContact) => {
-        const { id, name, number } = visibleContact;
+        const { _id, name, number } = visibleContact;
         return (
-          <ContactItem key={id}>
+          <ContactItem key={_id}>
             <Contact>
               {name.toUpperCase()} : {number}
             </Contact>
-            <DeleteContactBtn type="button" onClick={() => handleClick(id)}>
+            <DeleteContactBtn type="button" onClick={() => handleClick(_id)}>
               <FaUsersSlash />
             </DeleteContactBtn>
           </ContactItem>

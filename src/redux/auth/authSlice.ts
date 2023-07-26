@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 export interface IUser {
   name: string | null;
   email: string | null;
+  avatar?: string;
 }
 
 export interface AuthState {
@@ -33,15 +34,12 @@ const authSlice = createSlice({
         state.isRefreshing = true;
       })
       .addCase(userRegister.fulfilled, (state, action) => {
-        // state.user = action.payload.user;
-        // state.token = action.payload.token;
-        // state.isLoggedIn = true;
         state.message = action.payload.message;
         state.isRefreshing = false;
       })
-      .addCase(userRegister.rejected, (state) => {
+      .addCase(userRegister.rejected, (state, action) => {
         state.isRefreshing = false;
-        toast.error("OOps something went wrong, please try again");
+        toast.error(`${action.payload}`);
       });
 
     builder
@@ -54,9 +52,9 @@ const authSlice = createSlice({
         state.isLoggedIn = true;
         state.isRefreshing = false;
       })
-      .addCase(logIn.rejected, (state) => {
+      .addCase(logIn.rejected, (state, action) => {
         state.isRefreshing = false;
-        toast.error("OOps something went wrong, please try again");
+        toast.error(`${action.payload}`);
       });
 
     builder
@@ -69,9 +67,9 @@ const authSlice = createSlice({
         state.isLoggedIn = false;
         state.isRefreshing = false;
       })
-      .addCase(logOut.rejected, (state) => {
+      .addCase(logOut.rejected, (state, action) => {
         state.isRefreshing = false;
-        toast.error("OOps something went wrong, please try again");
+        toast.error(`${action.payload}`);
       });
 
     builder
@@ -83,9 +81,8 @@ const authSlice = createSlice({
         state.isLoggedIn = true;
         state.isRefreshing = false;
       })
-      .addCase(refreshUser.rejected, (state) => {
+      .addCase(refreshUser.rejected, (state, action) => {
         state.isRefreshing = false;
-        toast.error("OOps something went wrong, please try again");
       });
   },
 });

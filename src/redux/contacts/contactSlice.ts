@@ -3,7 +3,7 @@ import { fetchContacts, addContact, deleteContact } from "./operations";
 import { toast } from "react-hot-toast";
 
 export interface IContact {
-  id?: number;
+  _id?: number;
   name: string;
   number: string;
 }
@@ -63,7 +63,7 @@ const contactsSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         state.items = state.items.filter(
-          (contact) => contact.id !== action.payload
+          (contact) => contact._id !== action.payload
         );
       })
       .addCase(deleteContact.rejected, (state, action) => {

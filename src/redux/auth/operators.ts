@@ -2,8 +2,7 @@ import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { AuthState } from "./authSlice";
 
-// axios.defaults.baseURL = "https://connections-api.herokuapp.com";
-axios.defaults.baseURL = "http://localhost:3001/api";
+axios.defaults.baseURL = "https://contacts-book-d66c.onrender.com";
 
 const setAuthHeader = (token: string) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -24,7 +23,19 @@ export const userRegister = createAsyncThunk(
       setAuthHeader(res.data.token);
       return res.data;
     } catch (error: any) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.response?.data.message);
+    }
+  }
+);
+
+export const userVerify = createAsyncThunk(
+  "auth/verify",
+  async (credentials: { verifyCode: number }, thunkAPI) => {
+    try {
+      const res = await axios.get(`/users/verify/${credentials.verifyCode}`);
+      return res.data;
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue(error.response?.data.message);
     }
   }
 );
@@ -37,17 +48,18 @@ export const logIn = createAsyncThunk(
       setAuthHeader(res.data.token);
       return res.data;
     } catch (error: any) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.response?.data.message);
     }
   }
 );
 
 export const logOut = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   try {
-    await axios.post("/users/logout");
+    const res = await axios.post("/users/logout");
     clearAuthHeader();
+    return res.data;
   } catch (error: any) {
-    return thunkAPI.rejectWithValue(error.message);
+    return thunkAPI.rejectWithValue(error.response?.data.message);
   }
 });
 
@@ -66,7 +78,7 @@ export const refreshUser = createAsyncThunk(
       const res = await axios.get("/users/current");
       return res.data;
     } catch (error: any) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.response?.data.message);
     }
   }
 );

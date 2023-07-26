@@ -11,7 +11,11 @@ export default function Register() {
   return (
     <GreetingWraper>
       {message ? (
-        <p>{message}</p>
+        <>
+          <p>{message}</p>
+          <input type="text" />
+          <button type="button">Send</button>
+        </>
       ) : (
         <>
           <RegisterForm />

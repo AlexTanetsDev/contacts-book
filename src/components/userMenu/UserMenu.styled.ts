@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const UserWraper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -41,8 +42,17 @@ export const StyledLogoutBtn = styled.button`
 
 export const UserName = styled.p`
   display: flex;
+  align-items: center;
   gap: 5px;
 
   font-size: 24px;
   font-weight: 500;
+`;
+export const UserAvatar = styled.img`
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  :hover {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
 `;
