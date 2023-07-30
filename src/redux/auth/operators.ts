@@ -2,7 +2,7 @@ import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { AuthState } from "./authSlice";
 
-axios.defaults.baseURL = "https://contacts-book-d66c.onrender.com";
+axios.defaults.baseURL = "https://contacts-book-d66c.onrender.com/api";
 
 const setAuthHeader = (token: string) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;

@@ -1,8 +1,9 @@
 import { GlobalStyles } from "./utils/globalStyles";
 import { useEffect, lazy } from "react";
 import { Route, Routes } from "react-router-dom";
-import { Layout } from "./components/Loyaut";
 import { PrivateRoute } from "./utils/PrivateRoute";
+
+import { Layout } from "./components/Loyaut";
 import { RestrictedRoute } from "./utils/RestrictedRoute";
 import { refreshUser } from "./redux/auth/operators";
 import { useAppDispatch } from "./hooks";
@@ -51,6 +52,7 @@ export const App = () => {
             }
           />
         </Route>
+        {/* <Route path="*" element={<NotFoundPage />} /> */}
       </Routes>
     </>
   );
