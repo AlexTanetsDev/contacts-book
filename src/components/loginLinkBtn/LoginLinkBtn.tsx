@@ -7,5 +7,9 @@ type LogitLinkBtnProps = {
 };
 
 export const LoginLinkBtn: FC<LogitLinkBtnProps> = ({ title, to }) => {
-  return <LoginLogoutBtn to={to}>{title}</LoginLogoutBtn>;
+  return (
+    <LoginLogoutBtn to={to} reloadDocument>
+      {title}
+    </LoginLogoutBtn>
+  );
 };

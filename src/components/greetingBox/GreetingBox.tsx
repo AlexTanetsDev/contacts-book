@@ -33,8 +33,12 @@ export const GreetingBox = () => {
       </IconBox>
 
       <GreetingBtnBox>
-        <GreetingBtn to="/login">Sing in</GreetingBtn>
-        <GreetingBtn to="/register">Register</GreetingBtn>
+        <GreetingBtn to="/login" reloadDocument>
+          Sing in
+        </GreetingBtn>
+        <GreetingBtn to="/register" reloadDocument>
+          Register
+        </GreetingBtn>
       </GreetingBtnBox>
     </GreetingWraper>
   );
