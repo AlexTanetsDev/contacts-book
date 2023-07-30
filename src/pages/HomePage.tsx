@@ -6,5 +6,5 @@ import { selectIsLoggedIn } from "../redux/auth/selectors";
 export default function Home() {
   const isLoggedIn: boolean = useSelector(selectIsLoggedIn);
 
-  return <>{!isLoggedIn ? <GreetingBox /> : <HomeView />}</>;
+  return <> {!isLoggedIn ? <GreetingBox /> : <HomeView />}</>;
 }
