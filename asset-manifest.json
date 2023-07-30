@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/contacts-book/static/css/main.7cda0caf.css",
+    "main.js": "/contacts-book/static/js/main.cf71c2a6.js",
+    "static/js/550.fb61aeb7.chunk.js": "/contacts-book/static/js/550.fb61aeb7.chunk.js",
+    "static/js/820.af5bb72d.chunk.js": "/contacts-book/static/js/820.af5bb72d.chunk.js",
+    "static/js/420.0d114c5d.chunk.js": "/contacts-book/static/js/420.0d114c5d.chunk.js",
+    "static/js/544.adc474d0.chunk.js": "/contacts-book/static/js/544.adc474d0.chunk.js",
+    "static/js/126.e80d827d.chunk.js": "/contacts-book/static/js/126.e80d827d.chunk.js",
+    "static/js/355.9135a5f2.chunk.js": "/contacts-book/static/js/355.9135a5f2.chunk.js",
+    "index.html": "/contacts-book/index.html",
+    "main.7cda0caf.css.map": "/contacts-book/static/css/main.7cda0caf.css.map",
+    "main.cf71c2a6.js.map": "/contacts-book/static/js/main.cf71c2a6.js.map",
+    "550.fb61aeb7.chunk.js.map": "/contacts-book/static/js/550.fb61aeb7.chunk.js.map",
+    "820.af5bb72d.chunk.js.map": "/contacts-book/static/js/820.af5bb72d.chunk.js.map",
+    "420.0d114c5d.chunk.js.map": "/contacts-book/static/js/420.0d114c5d.chunk.js.map",
+    "544.adc474d0.chunk.js.map": "/contacts-book/static/js/544.adc474d0.chunk.js.map",
+    "126.e80d827d.chunk.js.map": "/contacts-book/static/js/126.e80d827d.chunk.js.map",
+    "355.9135a5f2.chunk.js.map": "/contacts-book/static/js/355.9135a5f2.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7cda0caf.css",
+    "static/js/main.cf71c2a6.js"
+  ]
+}
